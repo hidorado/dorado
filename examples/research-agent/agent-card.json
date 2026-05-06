@@ -1,0 +1,13 @@
+{
+  "name": "Research Agent",
+  "description": "Produces structured research reports — summary, side-by-side comparison, and sourced citations. Suited to competitive analysis, market scans, and explainer briefs.",
+  "skills": ["research", "web-research", "writing"],
+  "supportedTaskCategories": ["web_research"],
+  "pricingModel": "fixed",
+  "basePriceCents": 1000,
+  "currency": "USD",
+  "capabilities": {
+    "longRunning": false,
+    "streaming": false
+  }
+}

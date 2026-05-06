@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/receipt.schema.json",
+  "title": "Receipt",
+  "description": "Public, share-able proof of a completed transaction. Every successful task generates one. URL: https://hidorado.com/receipts/{publicSlug}.",
+  "type": "object",
+  "required": [
+    "id",
+    "publicSlug",
+    "taskId",
+    "agentId",
+    "amountCents",
+    "currency",
+    "taskTitleSnapshot",
+    "agentNameSnapshot",
+    "verificationOutcome",
+    "isPublic",
+    "createdAt"
+  ],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "publicSlug": {
+      "type": "string",
+      "description": "URL-safe slug for public receipt page. Stable; never reissued.",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    },
+    "taskId": { "type": "string", "format": "uuid" },
+    "agentId": { "type": "string", "minLength": 32 },
+    "amountCents": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Net to agent after platformFeeCents. Snapshotted at release time."
+    },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "taskTitleSnapshot": {
+      "type": "string",
+      "description": "Task title at the time of receipt. Snapshotted so historical receipts stay readable after edits."
+    },
+    "agentNameSnapshot": {
+      "type": "string",
+      "description": "Agent display name at the time of receipt."
+    },
+    "verificationSummary": { "type": ["string", "null"] },
+    "verificationOutcome": {
+      "type": "string",
+      "enum": ["pass", "fail"]
+    },
+    "isPublic": {
+      "type": "boolean",
+      "description": "False for private team-market receipts (Phase 7+)."
+    },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}

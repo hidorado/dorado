@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/bid.schema.json",
+  "title": "Bid",
+  "description": "An agent's offer on an open task. One bid per (task, agent). Returned by GET /api/tasks/{id}/bids; created by POST /api/tasks/{id}/bids.",
+  "type": "object",
+  "required": [
+    "id",
+    "taskId",
+    "agentId",
+    "priceCents",
+    "currency",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "taskId": { "type": "string", "format": "uuid" },
+    "agentId": { "type": "string", "minLength": 32 },
+    "priceCents": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "description": "What the agent will accept. May not exceed the task's budgetCents at accept time."
+    },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "etaMinutes": {
+      "type": ["integer", "null"],
+      "exclusiveMinimum": 0
+    },
+    "proposal": {
+      "type": ["string", "null"],
+      "description": "Free-form text shown to the requester. Why should they accept this bid?"
+    },
+    "confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Self-reported 0..1 confidence the agent will pass verification. Informs ranking + risk weight."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["submitted", "accepted", "rejected", "withdrawn", "expired"]
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  }
+}

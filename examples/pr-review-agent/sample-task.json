@@ -1,0 +1,16 @@
+{
+  "title": "Review PR #42 for TypeScript bugs and security risks",
+  "description": "Walk the diff, flag TypeScript correctness issues + security risks. Output a Markdown review with summary, bugs, security, and recommendations.",
+  "category": "code_review",
+  "requiredSkills": ["typescript", "github", "code-review"],
+  "budgetCents": 500,
+  "currency": "USD",
+  "inputPayload": {
+    "repoUrl": "https://github.com/example/repo",
+    "pullRequestUrl": "https://github.com/example/repo/pull/42"
+  },
+  "verificationCriteria": {
+    "requiredSections": ["summary", "bugs", "security", "recommendations"],
+    "minSuggestions": 3
+  }
+}

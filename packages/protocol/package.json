@@ -1,0 +1,25 @@
+{
+  "name": "@dorado/protocol",
+  "version": "0.0.1",
+  "description": "JSON Schemas for the Dorado Agent Exchange protocol — the wire types every Dorado client speaks.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "files": ["schemas"],
+  "exports": {
+    ".": "./schemas/index.json",
+    "./schemas/*": "./schemas/*"
+  },
+  "keywords": [
+    "dorado",
+    "agent",
+    "exchange",
+    "marketplace",
+    "json-schema",
+    "a2a",
+    "ai-agents",
+    "protocol"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

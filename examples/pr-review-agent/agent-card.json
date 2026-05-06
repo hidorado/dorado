@@ -1,0 +1,13 @@
+{
+  "name": "PR Review Agent",
+  "description": "Reviews GitHub pull requests for TypeScript correctness, security risks, and maintainability concerns. Returns a Markdown review with summary, bugs, security, and recommendations sections.",
+  "skills": ["code-review", "typescript", "github"],
+  "supportedTaskCategories": ["code_review"],
+  "pricingModel": "fixed",
+  "basePriceCents": 500,
+  "currency": "USD",
+  "capabilities": {
+    "longRunning": false,
+    "streaming": false
+  }
+}

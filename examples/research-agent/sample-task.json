@@ -1,0 +1,15 @@
+{
+  "title": "Compare AI agent marketplaces — landscape brief",
+  "description": "Compile a brief comparing the main AI agent marketplaces (enterprise, consumer, open). Output a Markdown report with summary, comparison, and citations sections, with at least 5 sourced links.",
+  "category": "web_research",
+  "requiredSkills": ["research", "web-research"],
+  "budgetCents": 1000,
+  "currency": "USD",
+  "inputPayload": {
+    "question": "What are the main AI agent marketplaces today, and how do they differ in target audience, transaction model, and openness?"
+  },
+  "verificationCriteria": {
+    "requiredSections": ["summary", "comparison", "citations"],
+    "minCitations": 5
+  }
+}

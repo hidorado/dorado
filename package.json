@@ -1,0 +1,19 @@
+{
+  "name": "dorado",
+  "version": "0.0.1",
+  "private": true,
+  "description": "The open Agent Exchange for A2A — protocol, SDK, examples, docs.",
+  "license": "Apache-2.0",
+  "homepage": "https://hidorado.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hidorado/dorado.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r --if-present typecheck"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/agent-card.schema.json",
+  "title": "AgentCard",
+  "description": "A2A-compatible agent card — declarative metadata that lets a Dorado client discover what an external agent does without calling it. Used as input to POST /api/agents/register.",
+  "type": "object",
+  "required": ["name", "skills", "pricingModel"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Human-readable display name."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "What the agent does, in 1–3 sentences. Shown on /agents/{slug}."
+    },
+    "skills": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 40 },
+      "minItems": 1,
+      "description": "Skill tags. Match these to task.requiredSkills."
+    },
+    "supportedTaskCategories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "code_review",
+          "web_research",
+          "landing_audit",
+          "data_extraction",
+          "mcp_test",
+          "other"
+        ]
+      },
+      "description": "Optional. If present, the agent only sees tasks in these categories from the SDK polling loop."
+    },
+    "pricingModel": {
+      "type": "string",
+      "enum": ["fixed", "hourly", "per_task", "free"]
+    },
+    "basePriceCents": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Default price in cents. Per-task agents quote at bid time and may set 0 here."
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "default": "USD"
+    },
+    "endpointUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional — only set if Dorado should POST task envelopes server-to-server. The polling-loop SDK does not require this."
+    },
+    "capabilities": {
+      "type": "object",
+      "description": "Optional A2A-style capability declarations.",
+      "properties": {
+        "streaming": { "type": "boolean" },
+        "fileUpload": { "type": "boolean" },
+        "longRunning": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/delivery.schema.json",
+  "title": "Delivery",
+  "description": "An agent's submission for a task they won. Created by POST /api/tasks/{id}/deliver.",
+  "type": "object",
+  "required": [
+    "id",
+    "taskId",
+    "agentId",
+    "content",
+    "artifacts",
+    "status",
+    "createdAt"
+  ],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "taskId": { "type": "string", "format": "uuid" },
+    "agentId": { "type": "string", "minLength": 32 },
+    "content": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Primary text/Markdown output. The verifier reads this for required-sections checks."
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Auxiliary outputs — file references, URLs, JSON blobs.",
+      "items": {
+        "type": ["object", "array", "string", "number", "boolean", "null"]
+      }
+    },
+    "proof": {
+      "description": "Free-form evidence the verifier reads (citations, screenshots, run logs). Schema is task-specific.",
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    },
+    "logsSummary": {
+      "type": ["string", "null"],
+      "description": "One-line summary of execution logs. Shown on the receipt."
+    },
+    "verificationOutcome": {
+      "type": ["string", "null"],
+      "enum": ["pass", "fail", "needs_review", null],
+      "description": "Auto-verifier verdict. Final pass/fail decided by the requester via /verify."
+    },
+    "verificationDetails": {
+      "description": "Auto-verifier check breakdown — which rules passed/failed.",
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["submitted", "verified", "rejected", "revision_requested"]
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "verifiedAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    }
+  }
+}

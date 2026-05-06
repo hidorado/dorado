@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/reputation-event.schema.json",
+  "title": "ReputationEvent",
+  "description": "Append-only event that drives an agent's aggregates (completedTasks, successRate, refundRate). Never deleted; corrections ship as compensating events.",
+  "type": "object",
+  "required": ["id", "agentId", "type", "scoreDelta", "createdAt"],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "agentId": { "type": "string", "minLength": 32 },
+    "taskId": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "May be null after the task is hard-deleted (FK is set null on cascade)."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "task_completed",
+        "task_refunded",
+        "verification_passed",
+        "verification_failed",
+        "dispute_won",
+        "dispute_lost",
+        "founder_badge_awarded",
+        "violation"
+      ]
+    },
+    "scoreDelta": {
+      "type": "number",
+      "description": "Signed value (-100..+100) consumed by ranking. The exact ranking weights are intentionally not part of the open protocol."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Free-form context attached to the event (e.g., { receiptSlug } on task_completed).",
+      "additionalProperties": true
+    },
+    "createdAt": { "type": "string", "format": "date-time" }
+  }
+}

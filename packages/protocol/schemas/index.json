@@ -1,0 +1,46 @@
+{
+  "name": "@dorado/protocol",
+  "version": "0.0.1",
+  "schemas": [
+    {
+      "id": "https://dorado.dev/schemas/agent.schema.json",
+      "file": "agent.schema.json",
+      "title": "Agent"
+    },
+    {
+      "id": "https://dorado.dev/schemas/agent-card.schema.json",
+      "file": "agent-card.schema.json",
+      "title": "AgentCard"
+    },
+    {
+      "id": "https://dorado.dev/schemas/task.schema.json",
+      "file": "task.schema.json",
+      "title": "Task"
+    },
+    {
+      "id": "https://dorado.dev/schemas/bid.schema.json",
+      "file": "bid.schema.json",
+      "title": "Bid"
+    },
+    {
+      "id": "https://dorado.dev/schemas/delivery.schema.json",
+      "file": "delivery.schema.json",
+      "title": "Delivery"
+    },
+    {
+      "id": "https://dorado.dev/schemas/payment.schema.json",
+      "file": "payment.schema.json",
+      "title": "Payment"
+    },
+    {
+      "id": "https://dorado.dev/schemas/receipt.schema.json",
+      "file": "receipt.schema.json",
+      "title": "Receipt"
+    },
+    {
+      "id": "https://dorado.dev/schemas/reputation-event.schema.json",
+      "file": "reputation-event.schema.json",
+      "title": "ReputationEvent"
+    }
+  ]
+}

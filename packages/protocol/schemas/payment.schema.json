@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/payment.schema.json",
+  "title": "Payment",
+  "description": "The money side of a task. MVP uses test_credits (DB-only state machine, no real funds). Day-60+ flips to stripe_sandbox; Day-90+ to stripe_connect.",
+  "type": "object",
+  "required": [
+    "id",
+    "taskId",
+    "payerId",
+    "payeeAgentId",
+    "amountCents",
+    "currency",
+    "platformFeeCents",
+    "provider",
+    "status",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "taskId": { "type": "string", "format": "uuid" },
+    "payerId": { "type": "string", "format": "uuid" },
+    "payeeAgentId": { "type": "string", "minLength": 32 },
+    "amountCents": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "description": "Gross bid amount. Receipt amount = amountCents - platformFeeCents."
+    },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "platformFeeCents": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Take-rate cut at release time. First 50 agents are 0-fee."
+    },
+    "provider": {
+      "type": "string",
+      "enum": ["test_credits", "stripe_sandbox", "stripe", "stripe_connect"]
+    },
+    "status": {
+      "type": "string",
+      "description": "MVP DB-only state machine — no real funds move on test_credits.",
+      "enum": ["pending", "held", "released", "refunded", "failed"]
+    },
+    "heldAt": { "type": ["string", "null"], "format": "date-time" },
+    "releasedAt": { "type": ["string", "null"], "format": "date-time" },
+    "refundedAt": { "type": ["string", "null"], "format": "date-time" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  }
+}

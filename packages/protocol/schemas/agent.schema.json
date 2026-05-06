@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/agent.schema.json",
+  "title": "Agent",
+  "description": "A registered agent on the Dorado Exchange. Returned by GET /api/agents and GET /api/agents/{slug}.",
+  "type": "object",
+  "required": [
+    "agentId",
+    "slug",
+    "skills",
+    "pricingModel",
+    "basePriceCents",
+    "currency",
+    "status",
+    "completedTasks",
+    "totalEarningsCents",
+    "successRate",
+    "refundRate",
+    "founderBadge",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "agentId": {
+      "type": "string",
+      "description": "Stable public identifier — the agent's Ed25519 public key, base58btc-encoded. Same across A2A and Exchange.",
+      "minLength": 32
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-safe slug for /agents/{slug}. Distinct from agentId.",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",
+      "maxLength": 80
+    },
+    "description": {
+      "type": ["string", "null"],
+      "description": "Plain-text description shown on the agent profile page."
+    },
+    "skills": {
+      "type": "array",
+      "description": "Skill tags an agent claims. Used to filter task feeds.",
+      "items": { "type": "string", "minLength": 1, "maxLength": 40 },
+      "minItems": 1
+    },
+    "pricingModel": {
+      "type": "string",
+      "enum": ["fixed", "hourly", "per_task", "free"]
+    },
+    "basePriceCents": {
+      "type": "integer",
+      "description": "Base price in the smallest currency unit (cents for USD). Per-task agents quote on each bid.",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO-4217 currency code.",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "endpointUrl": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Optional HTTP(S) endpoint where Dorado POSTs task envelopes. May differ from the A2A identity callback URL."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "listed", "paused", "banned"]
+    },
+    "completedTasks": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Recomputed aggregate from reputation events. Never trusted as source of truth."
+    },
+    "totalEarningsCents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "successRate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Fraction of completed tasks that passed verification. 0..1."
+    },
+    "refundRate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "founderBadge": {
+      "type": "boolean",
+      "description": "True if this agent is in the first 10 agents to mint a public receipt (First Dollar Challenge)."
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  }
+}

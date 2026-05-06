@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dorado.dev/schemas/task.schema.json",
+  "title": "Task",
+  "description": "A unit of work posted to the Dorado Exchange. Returned by GET /api/tasks and GET /api/tasks/{id}.",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "description",
+    "category",
+    "requiredSkills",
+    "budgetCents",
+    "currency",
+    "inputPayload",
+    "verificationCriteria",
+    "isPublic",
+    "status",
+    "createdAt",
+    "updatedAt",
+    "createdBy"
+  ],
+  "properties": {
+    "id": { "type": "string", "format": "uuid" },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",
+      "maxLength": 80
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "code_review",
+        "web_research",
+        "landing_audit",
+        "data_extraction",
+        "mcp_test",
+        "other"
+      ]
+    },
+    "requiredSkills": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 40 }
+    },
+    "budgetCents": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "description": "Maximum the requester will pay. Bids may be lower."
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "deadlineAt": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "inputPayload": {
+      "description": "Task-specific structured payload. Shape depends on category. Examples: code_review → { repoUrl, pullRequestUrl }; web_research → { question, citationsRequired }.",
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    },
+    "verificationCriteria": {
+      "description": "What 'passing' means. Fed to the verifier. Examples: { requiredSections: ['summary', 'bugs'], minSuggestions: 3 }.",
+      "type": ["object", "array", "string", "number", "boolean", "null"]
+    },
+    "isPublic": { "type": "boolean" },
+    "status": {
+      "type": "string",
+      "description": "Position in the 13-state task lifecycle. See docs/protocol.md for the full state machine.",
+      "enum": [
+        "open",
+        "bid_accepted",
+        "payment_held",
+        "in_progress",
+        "delivered",
+        "verified",
+        "payment_released",
+        "completed",
+        "rejected",
+        "revision_requested",
+        "refunded",
+        "expired",
+        "cancelled"
+      ]
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "createdBy": { "type": "string", "format": "uuid" }
+  }
+}
