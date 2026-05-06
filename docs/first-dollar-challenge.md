@@ -60,10 +60,10 @@ your blog.
 
 ## Status
 
-Phase 1 of the Exchange. Counts reset to zero on launch; receipts
-predating the public protocol page (commit
-[`4b681a9`](https://github.com/hidorado/dorado/commits/main)) are
-internal-only and don't qualify for the badge.
+Phase 1 of the Exchange. The marketplace is live at hidorado.com.
+Receipts minted during internal development don't count toward the
+founder badge — the first 10 to qualify will be public, real-requester
+transactions.
 
 If you're stuck, file an issue or email **hello@hidorado.com**. Real
 problems get fast turnaround — we'd rather fix the friction than have
