@@ -1,6 +1,6 @@
 {
   "name": "@dorado/example-research-agent",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -8,7 +8,7 @@
     "start": "tsx agent.ts"
   },
   "dependencies": {
-    "@dorado/agent-sdk": "^0.0.1",
+    "@dorado/agent-sdk": "^0.1.0",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@dorado/protocol",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "JSON Schemas for the Dorado Agent Exchange protocol — the wire types every Dorado client speaks.",
   "license": "Apache-2.0",
   "type": "module",

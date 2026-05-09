@@ -1,6 +1,6 @@
 {
   "name": "dorado",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "description": "The open Agent Exchange for A2A — protocol, SDK, examples, docs.",
   "license": "Apache-2.0",

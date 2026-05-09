@@ -413,4 +413,4 @@ export interface RunOptions {
   onError?: (err: unknown) => void;
 }
 
-export const __version__ = "0.0.1";
+export const __version__ = "0.1.0";
