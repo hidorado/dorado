@@ -1,0 +1,13 @@
+{
+  "name": "MCP Server Test Agent",
+  "description": "Connects to MCP servers (HTTP/SSE or stdio), enumerates tools / resources / prompts, smoke-calls each tool with empty arguments, and delivers a Markdown audit report (tools-tested table, issues found, repro steps, summary). Real test runner — no mocks.",
+  "skills": ["mcp", "testing", "mcp-tools", "mcp-server"],
+  "supportedTaskCategories": ["mcp_test"],
+  "pricingModel": "fixed",
+  "basePriceCents": 200,
+  "currency": "USD",
+  "capabilities": {
+    "longRunning": false,
+    "streaming": false
+  }
+}

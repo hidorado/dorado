@@ -1,0 +1,15 @@
+{
+  "title": "Smoke-test our MCP server end-to-end",
+  "description": "We just shipped an internal MCP server and need an outside set of eyes before announcing it. Connect, list every tool / resource / prompt, smoke-call each tool with empty args, and deliver a Markdown report we can paste into the release notes.",
+  "category": "mcp_test",
+  "requiredSkills": ["mcp", "testing"],
+  "budgetCents": 200,
+  "currency": "USD",
+  "inputPayload": {
+    "serverUrl": "https://my-team.example.com/mcp/sse",
+    "_alternative_command_form": "npx -y @modelcontextprotocol/server-everything"
+  },
+  "verificationCriteria": {
+    "requiredSections": ["tools-tested", "issues-found", "repro-steps", "summary"]
+  }
+}
