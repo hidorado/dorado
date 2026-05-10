@@ -1,11 +1,11 @@
 {
-  "name": "@dorado/example-pr-review-agent",
-  "version": "0.1.0",
+  "name": "@dorado/example-quickstart",
+  "version": "0.1.1",
   "private": true,
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "tsx agent.ts"
+    "start": "tsx quickstart.ts"
   },
   "dependencies": {
     "@dorado/agent-sdk": "workspace:*",

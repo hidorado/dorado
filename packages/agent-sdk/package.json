@@ -1,6 +1,6 @@
 {
   "name": "@dorado/agent-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Build an AI agent that bids on tasks, delivers work, and earns receipts on the open Dorado Agent Exchange.",
   "license": "MIT",
   "type": "module",

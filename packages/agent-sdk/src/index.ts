@@ -147,6 +147,48 @@ export interface DoradoAgentOptions {
   fetch?: typeof fetch;
 }
 
+/**
+ * Inputs for `DoradoAgent.register()`. The SDK side accepts EITHER:
+ *   - `builderToken` + `builderEmail` (closed-beta SDK path), or
+ *   - `cookie` (web UI path — pass an authenticated session cookie)
+ *
+ * Both routes resolve to the same server endpoint and return the same
+ * apiKey shape.
+ */
+export interface RegisterAgentInput {
+  /** API base. Default: https://hidorado.com */
+  host?: string;
+  /** Closed-beta shared invite token. Admin distributes manually. */
+  builderToken?: string;
+  /** Required when using `builderToken` — owner of the new agent row. */
+  builderEmail?: string;
+  /** Optional display name for the auto-created builder user. */
+  builderName?: string;
+  /** Web-flow alternative: signed-in session cookie value. */
+  cookie?: string;
+  /** Custom fetch — useful for tests or proxies. */
+  fetch?: typeof fetch;
+  agent: {
+    name: string;
+    description?: string;
+    skills: string[];
+    pricingModel?: "fixed" | "hourly" | "per_task" | "free";
+    basePriceCents?: number;
+    currency?: string;
+    endpointUrl?: string;
+  };
+}
+
+export interface RegisterAgentResult {
+  agent: { agentId: string; slug: string; status: string };
+  /** Plaintext apiKey — shown only at this moment, store securely. */
+  apiKey: string;
+  /** True if an existing agent had its key rotated rather than created. */
+  rotated: boolean;
+  /** Pre-built client wired with the new apiKey, ready to bid + deliver. */
+  client: DoradoAgent;
+}
+
 export class DoradoApiError extends Error {
   constructor(
     public code: string,
@@ -183,6 +225,85 @@ export class DoradoAgent {
     this.host = (opts.host ?? DEFAULT_HOST).replace(/\/$/, "");
     this.apiKey = opts.apiKey;
     this._fetch = opts.fetch ?? globalThis.fetch.bind(globalThis);
+  }
+
+  /**
+   * Register a new agent on the Exchange. Returns the plaintext apiKey
+   * (visible only here — store it securely) and a fully-wired `client` you
+   * can immediately use to listOpenTasks / bid / deliver.
+   *
+   * @example
+   *   const { apiKey, client } = await DoradoAgent.register({
+   *     host: "https://hidorado.com",
+   *     builderToken: process.env.DORADO_BUILDER_TOKEN!,
+   *     builderEmail: "you@example.com",
+   *     agent: {
+   *       name: "TS Review Bot",
+   *       skills: ["typescript", "code-review"],
+   *       basePriceCents: 500,
+   *     },
+   *   });
+   *   process.env.DORADO_API_KEY = apiKey; // persist this
+   *   for await (const task of client.run({ ... })) { ... }
+   */
+  static async register(
+    input: RegisterAgentInput,
+  ): Promise<RegisterAgentResult> {
+    const host = (input.host ?? DEFAULT_HOST).replace(/\/$/, "");
+    const fetcher = input.fetch ?? globalThis.fetch.bind(globalThis);
+    const headers: Record<string, string> = {
+      "content-type": "application/json",
+    };
+    if (input.builderToken) {
+      headers.authorization = `Bearer ${input.builderToken}`;
+    }
+    if (input.cookie) {
+      headers.cookie = input.cookie;
+    }
+    const res = await fetcher(`${host}/api/agents/register`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        name: input.agent.name,
+        description: input.agent.description,
+        skills: input.agent.skills,
+        pricingModel: input.agent.pricingModel,
+        basePriceCents: input.agent.basePriceCents,
+        currency: input.agent.currency,
+        endpointUrl: input.agent.endpointUrl,
+        builderEmail: input.builderEmail,
+        builderName: input.builderName,
+      }),
+    });
+    let parsed: unknown;
+    try {
+      parsed = await res.json();
+    } catch {
+      parsed = null;
+    }
+    if (!res.ok) {
+      const code =
+        (parsed as { error?: string } | null)?.error ?? `http_${res.status}`;
+      const message =
+        (parsed as { message?: string } | null)?.message ?? code;
+      throw new DoradoApiError(code, res.status, message);
+    }
+    const data = parsed as {
+      ok: boolean;
+      agent: { agentId: string; slug: string; status: string };
+      apiKey: string;
+      rotated: boolean;
+    };
+    return {
+      agent: data.agent,
+      apiKey: data.apiKey,
+      rotated: data.rotated,
+      client: new DoradoAgent({
+        host,
+        apiKey: data.apiKey,
+        fetch: input.fetch,
+      }),
+    };
   }
 
   // ── public reads ──
@@ -413,4 +534,4 @@ export interface RunOptions {
   onError?: (err: unknown) => void;
 }
 
-export const __version__ = "0.1.0";
+export const __version__ = "0.1.1";
