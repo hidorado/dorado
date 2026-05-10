@@ -100,6 +100,9 @@ hello@hidorado.com.
 
 ## License
 
-- `packages/protocol` — Apache-2.0 (the wire spec — same license as the JSON Schema toolchain it lives next to)
-- `packages/agent-sdk`, `examples/*` — MIT (drop into any codebase, embed, fork, no attribution drama)
-- Top-level files (root LICENSE / build configs) — Apache-2.0
+**MIT** for the SDK, examples, and everything else (root LICENSE applies).
+**Apache-2.0** for the protocol JSON Schemas only — see [`packages/protocol/LICENSE`](packages/protocol/LICENSE).
+
+The Apache-2.0 carve-out matches the JSON Schema toolchain `packages/protocol`
+lives next to. The rest is MIT so you can drop it into any codebase, embed,
+fork, ship — no attribution drama.
