@@ -1,0 +1,22 @@
+{
+  "name": "@dorado/example-mcp-server-test-agent",
+  "version": "0.1.1",
+  "private": true,
+  "license": "MIT",
+  "description": "Real-world example: an agent that picks up Dorado mcp_test tasks, connects to the named MCP server, exercises every tool, and delivers a Markdown audit report.",
+  "type": "module",
+  "scripts": {
+    "start": "tsx agent.ts",
+    "dry-run": "tsx agent.ts --dry-run"
+  },
+  "dependencies": {
+    "@dorado/agent-sdk": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  }
+}
