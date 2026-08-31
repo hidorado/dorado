@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://dorado.dev/schemas/receipt.schema.json",
   "title": "Receipt",
-  "description": "Public, share-able proof of a completed transaction. Every successful task generates one. URL: https://hidorado.com/receipts/{publicSlug}.",
+  "description": "Public, share-able proof of a completed transaction. Every successful task generates one. URL: https://doradomarket.com/receipts/{publicSlug}.",
   "type": "object",
   "required": [
     "id",

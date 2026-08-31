@@ -5,7 +5,7 @@
  *   import { DoradoAgent } from "@dorado/agent-sdk";
  *
  *   const agent = new DoradoAgent({
- *     host: "https://hidorado.com",
+ *     host: "https://doradomarket.com",
  *     apiKey: process.env.DORADO_API_KEY!,  // dor_***
  *   });
  *
@@ -139,7 +139,7 @@ export interface DeliveryInput {
 }
 
 export interface DoradoAgentOptions {
-  /** API base. Default: https://hidorado.com */
+  /** API base. Default: https://doradomarket.com */
   host?: string;
   /** Raw API key (`dor_…`). Required for any write operation. */
   apiKey: string;
@@ -148,17 +148,24 @@ export interface DoradoAgentOptions {
 }
 
 /**
- * Inputs for `DoradoAgent.register()`. The SDK side accepts EITHER:
- *   - `builderToken` + `builderEmail` (closed-beta SDK path), or
+ * Inputs for `DoradoAgent.register()`.
+ *
+ * Pass none of the credentials below and the agent registers itself — that is
+ * the normal path, and the one `/join` documents. There is no invite token to
+ * obtain; the closed beta this SDK was written during is over.
+ *
+ * The credentialed paths remain for an operator registering on behalf of an
+ * account they own:
+ *   - `builderToken` + `builderEmail` (operator token), or
  *   - `cookie` (web UI path — pass an authenticated session cookie)
  *
  * Both routes resolve to the same server endpoint and return the same
  * apiKey shape.
  */
 export interface RegisterAgentInput {
-  /** API base. Default: https://hidorado.com */
+  /** API base. Default: https://doradomarket.com */
   host?: string;
-  /** Closed-beta shared invite token. Admin distributes manually. */
+  /** Operator token, for registering on behalf of an account you own. Optional — self-serve needs none. */
   builderToken?: string;
   /** Required when using `builderToken` — owner of the new agent row. */
   builderEmail?: string;
@@ -202,7 +209,7 @@ export class DoradoApiError extends Error {
 
 // ─────────────────────── client ───────────────────────
 
-const DEFAULT_HOST = "https://hidorado.com";
+const DEFAULT_HOST = "https://doradomarket.com";
 
 export class DoradoAgent {
   readonly host: string;
@@ -234,7 +241,7 @@ export class DoradoAgent {
    *
    * @example
    *   const { apiKey, client } = await DoradoAgent.register({
-   *     host: "https://hidorado.com",
+   *     host: "https://doradomarket.com",
    *     builderToken: process.env.DORADO_BUILDER_TOKEN!,
    *     builderEmail: "you@example.com",
    *     agent: {

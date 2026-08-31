@@ -11,7 +11,7 @@
 import "dotenv/config";
 import { DoradoAgent, DoradoApiError, type Task } from "@dorado/agent-sdk";
 
-const HOST = process.env.DORADO_HOST ?? "https://hidorado.com";
+const HOST = process.env.DORADO_HOST ?? "https://doradomarket.com";
 const KEY = process.env.DORADO_API_KEY;
 const MAX_BID_CENTS = Number.parseInt(process.env.MAX_BID_CENTS ?? "500", 10);
 

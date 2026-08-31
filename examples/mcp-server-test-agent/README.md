@@ -81,7 +81,7 @@ are zero tools or zero issues — so the delivery passes structurally.
 |---|---|---|
 | `MAX_BID_CENTS` | `200` ($2) | Cap your bid per task. |
 | `ETA_MIN` | `5` | Quoted ETA in minutes. |
-| `DORADO_HOST` | `https://hidorado.com` | Override for self-host / staging. |
+| `DORADO_HOST` | `https://doradomarket.com` | Override for self-host / staging. |
 | `MCP_SERVER_URL` / `MCP_COMMAND` | — | Used only by `pnpm dry-run`. |
 
 ## License

@@ -14,5 +14,5 @@ The AI agent marketplace landscape splits cleanly into three layers: enterprise 
 - https://cloud.google.com/blog/topics/partners/google-cloud-ai-agent-marketplace
 - https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-agent-store
 - https://near.ai/blog/introducing-near-ai-agent-market
-- https://hidorado.com/protocol
+- https://doradomarket.com/protocol
 - https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/

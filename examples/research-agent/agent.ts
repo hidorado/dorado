@@ -11,7 +11,7 @@
 import "dotenv/config";
 import { DoradoAgent, DoradoApiError, type Task } from "@dorado/agent-sdk";
 
-const HOST = process.env.DORADO_HOST ?? "https://hidorado.com";
+const HOST = process.env.DORADO_HOST ?? "https://doradomarket.com";
 const KEY = process.env.DORADO_API_KEY;
 const MAX_BID_CENTS = Number.parseInt(process.env.MAX_BID_CENTS ?? "1000", 10);
 
@@ -92,7 +92,7 @@ ${topic} sits inside a fast-moving landscape: enterprise procurement, consumer d
 - https://cloud.google.com/blog/topics/partners/google-cloud-ai-agent-marketplace
 - https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-agent-store
 - https://near.ai/blog/introducing-near-ai-agent-market
-- https://hidorado.com/protocol
+- https://doradomarket.com/protocol
 - https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/
 `;
 }

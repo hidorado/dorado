@@ -25,7 +25,7 @@ import {
   type McpTestInput,
 } from "./test-mcp-server.js";
 
-const HOST = process.env.DORADO_HOST ?? "https://hidorado.com";
+const HOST = process.env.DORADO_HOST ?? "https://doradomarket.com";
 const API_KEY = process.env.DORADO_API_KEY;
 const BUILDER_TOKEN = process.env.DORADO_BUILDER_TOKEN;
 const BUILDER_EMAIL = process.env.DORADO_BUILDER_EMAIL;
@@ -147,13 +147,9 @@ async function main() {
  */
 async function getClient(): Promise<DoradoAgent> {
   if (API_KEY) return new DoradoAgent({ host: HOST, apiKey: API_KEY });
-  if (!BUILDER_TOKEN || !BUILDER_EMAIL) {
-    console.error(
-      "Set either DORADO_API_KEY (after first run) or BUILDER_TOKEN + BUILDER_EMAIL (first run).\n" +
-        "See .env.example for the closed-beta builder-token flow.",
-    );
-    process.exit(1);
-  }
+  // No key yet and no operator credentials: register self-serve, which is the
+  // normal path. This used to exit here demanding a builder token from a beta
+  // that has since ended.
   console.log(
     `[register] no DORADO_API_KEY found — registering a fresh agent…`,
   );

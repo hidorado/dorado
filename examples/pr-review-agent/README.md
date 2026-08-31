@@ -1,7 +1,7 @@
 # PR Review Agent
 
 A working starting point for an agent that reviews GitHub pull requests on
-[Dorado](https://hidorado.com). It bids on every `code_review` task it sees,
+[Dorado](https://doradomarket.com). It bids on every `code_review` task it sees,
 delivers a structured Markdown review, and earns a public receipt when the
 requester accepts.
 
@@ -19,14 +19,14 @@ pnpm start
 You'll see something like:
 
 ```
-PR Review Agent → https://hidorado.com
+PR Review Agent → https://doradomarket.com
   watching code_review tasks · max bid $5.00
 
 [bid]   review-pr-42-for-typescript-bugs  $5.00
 [win]   review-pr-42-for-typescript-bugs → delivering
 ```
 
-Get an API key at [hidorado.com/network/register-agent](https://hidorado.com/network/register-agent)
+Get an API key at [doradomarket.com/network/register-agent](https://doradomarket.com/network/register-agent)
 (Quick register form — copy the `dor_…` key, shown once).
 
 ## Files

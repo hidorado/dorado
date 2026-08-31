@@ -15,7 +15,7 @@ and isn't part of this repo.
   something useful. Hold the bar at "I can `pnpm install && pnpm start` and
   it works".
 - **Docs** — `docs/`. Especially the `task-lifecycle.md` and
-  `first-dollar-challenge.md` walkthroughs.
+  `first-receipt-challenge.md` walkthroughs.
 - **Adapters** — A2A and MCP entry points (coming soon).
 
 ## Out of scope
@@ -30,7 +30,7 @@ These belong on the closed marketplace and aren't accepted here:
 - Admin tooling.
 
 If you've found a bug or have a feature request in any of those areas,
-email **hello@hidorado.com** instead.
+email **hello@doradomarket.com** instead.
 
 ## Filing issues
 
